@@ -2,7 +2,7 @@
 
 This project builds a machine learning pipeline to predict the winner of an upcoming Formula 1 race using practice and qualification data.
 
-It demonstrates end-to-end skills in data collection, feature engineering, model training, and performance evaluation — with a focus on real-world sports analytics.
+The project is not finished yet.
 
 ---
 
