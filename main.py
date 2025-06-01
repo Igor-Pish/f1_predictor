@@ -17,8 +17,34 @@ def db_manual_update():
 if __name__ == "__main__":
     #print(is_table_empty(Race))
     #print(len(round_number_in_season(2022)) + len(round_number_in_season(2023)) + len(round_number_in_season(2024)))
-    years = range(2003, 2025)
-    df = collect_all_data(years)
-    print(len(df[df.isna().any(axis=1)]))
-    print(len(df))
-    train_stacked_predictor(years)
+    #years = range(2003, 2025)
+    #df = collect_all_data(years)
+    #print(len(df[df.isna().any(axis=1)]))
+    #print(len(df))
+
+    #random_state = round(np.random.random() * 100)
+    #print(random_state)
+
+    #train_stacked_predictor(years, random_state=random_state)
+
+    #train_logreg_model(years, random_state=random_state)
+
+    #train_rf_model(years, random_state=random_state)
+    #print(random_state)
+
+    year = int(input("Enter year\n"))
+
+    print(round_number_in_season_fastf1(year))
+
+    round = int(input("Enter round number\n"))
+
+    load_quali_results_fastf1(year, round)
+
+    print("=== LogReg Model prediction ===\n")
+    print(use_logreg_predictor(year, round))
+
+    print("=== RandomForest Model prediction ===\n")
+    print(use_rf_predictor(year, round))
+
+    print("=== Stacked Model prediction ===\n")
+    print(use_stacked_predictor(year, round))
