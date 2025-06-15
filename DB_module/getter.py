@@ -20,6 +20,15 @@ def is_table_empty(table_name):
     with SessionLocal() as session:
         return session.query(table_cls).count() == 0
 
+def get_races_by_year(year: int):
+    with SessionLocal() as session:
+        return session.query(Race).filter(Race.year == year).order_by(Race.round).all()
+    
+def get_race_result_by_year_and_round(year, round_number):
+    with SessionLocal() as session:
+        results = session.query(RaceResult).filter_by(year=year, round=round_number).all()
+        return results
+
 def get_race_results(year=None, round_num=None, driver=None):
     with SessionLocal() as session:
         query = session.query(RaceResult)

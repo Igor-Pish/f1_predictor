@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>F1 Races</title>
+</head>
+<body>
+    <h1>Выбор года и гонки</h1>
+
+    <form method="POST">
+        <label for="year">Год:</label>
+        <select name="year" id="year" onchange="this.form.submit()">
+            {% for y in years %}
+                <option value="{{ y }}" {% if selected_year == y %}selected{% endif %}>{{ y }}</option>
+            {% endfor %}
+        </select>
+
+        {% if races %}
+            <label for="race">Гонка:</label>
+            <select name="race" id="race">
+                {% for race in races %}
+                    <option value="{{ race.round }}"
+                        {% if selected_race_round == race.round|string %}selected{% endif %}>
+                        {{ race.round }} — {{ race.circuit_name }} ({{ race.country }})
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit">Показать</button>
+        {% endif %}
+
+        {% if race_results %}
+        <h2>Результаты гонки</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Позиция</th>
+                    <th>Гонщик</th>
+                    <th>Команда</th>
+                    <th>Время/Отставание</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in race_results %}
+                <tr>
+                    <td>{{ result.position }}</td>
+                    <td>{{ result.driver }}</td>
+                    <td>{{ result.team }}</td>
+                    <td>{{ result.time or result.status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </form>
+</body>
+</html>
